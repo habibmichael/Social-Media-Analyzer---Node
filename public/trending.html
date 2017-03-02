@@ -1,0 +1,111 @@
+<a href ="{% url 'Analyzer:index' %}">HOME</a>
+<!DOCCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Social Media Analyzer</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<style>
+	.jumbotron {
+		background-color: #f6f6f6;
+		color: #000000;
+		padding: 100px 25px;
+	}
+	.container-fluid {
+		padding: 60px 50px;
+	}
+	.chart {
+		padding-left: 0;
+		padding-right: 0;
+		margin-left: auto;
+		margin-right: auto;
+		display: block;
+		font-size: 30px;
+	}
+	</style>
+</head>
+<body>
+	<div class="jumbotron text-center">
+		<h1>Social Media Analyzer</h1>
+		<h2>You are looking at the chart of trending keywords for {{woeid_location}}</h2>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-3">
+				<h4>Twitter Top 10 Keywords</h4>
+				<p>Twitter (/ˈtwɪtər/) is an online news and social networking service where users post and read short 140-character messages called "tweets". Registered users can post and read tweets, but those who are unregistered can only read them. Users access Twitter through the website interface, SMS or mobile device app. Twitter Inc. is based in San Francisco and has more than 25 offices around the world. -Wikipedia-
+				</p>
+				<br>
+			</div>
+			<div class="col-sm-9">
+				<canvas class="chart" id="myChart" width="800" height="800"></canvas>
+			</div>
+		</div>
+	</div>
+
+</div>
+<br>
+<script>
+var ctx = document.getElementById("myChart");
+var myChart = new Chart(ctx, {
+	type: 'bar',
+	data: {
+		labels: {{keywords|safe}},
+		datasets: [{
+			label: '',
+			data: {{ counts_data }},
+			backgroundColor: [
+			'rgba(255, 99, 132, 0.2)',
+			'rgba(54, 162, 235, 0.2)',
+			'rgba(255, 206, 86, 0.2)',
+			'rgba(75, 192, 192, 0.2)',
+			'rgba(153, 102, 255, 0.2)',
+			'rgba(255, 159, 64, 0.2)',
+			'rgba(255, 99, 132, 0.2)',
+			'rgba(54, 162, 235, 0.2)',
+			'rgba(255, 206, 86, 0.2)',
+			'rgba(75, 192, 192, 0.2)'
+			],
+			borderColor: [
+			'rgba(255,99,132,1)',
+			'rgba(54, 162, 235, 1)',
+			'rgba(255, 206, 86, 1)',
+			'rgba(75, 192, 192, 1)',
+			'rgba(153, 102, 255, 1)',
+			'rgba(255, 159, 64, 1)',
+			'rgba(255,99,132,1)',
+			'rgba(54, 162, 235, 1)',
+			'rgba(255, 206, 86, 1)',
+			'rgba(75, 192, 192, 1)'
+			],
+			borderWidth: 1
+		}]
+	},
+	options: {
+		responsive: false,
+		scales: {
+			yAxes: [{
+				ticks: {
+					beginAtZero:true
+				}
+			}]
+		},
+		legend: {
+			display: false
+		}
+
+	}
+});
+
+</script>
+
+<hr>
+<a href ="{% url 'Analyzer:index' %}">HOME</a>
+</body>
+</html>

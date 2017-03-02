@@ -1,0 +1,16 @@
+<a href ="{% url 'Analyzer:index' %}">HOME</a>
+<h3>Tweets that have {{keyword}} as a part of the tweets</h3>
+ <ol>
+    {% for post in posts %}
+     <li>
+        <ul>
+            <li>Author Name Tag: {{post.author}}</li>
+            <li>Created date of this tweet: {{post.date}}</li>
+            <li>Tweet detail: {{post.body}}</li>
+            <li>Tweet score: {{post.score}}</li>
+        </ul>
+         <br/>
+     </li>
+    {%endfor%}
+ </ol>
+<a href ="{% url 'Analyzer:index' %}">HOME</a>

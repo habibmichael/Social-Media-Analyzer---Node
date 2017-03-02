@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Facebooks</title>
+</head>
+<body>
+<a href ="{% url 'Analyzer:index' %}">HOME</a>
+
+<h3>Groups that have {{keyword}} as a part of the tweets</h3>
+
+ <ol>
+    {% for item in groups %}
+     <li>
+        <ul>
+            <li>Author Name Tag: {{item.author}}</li>
+            <li>Group description: {{item.body}}</li>
+            <li>Description score: {{item.score}}</li>
+        </ul>
+         <br/>
+     </li>
+    {%endfor%}
+ </ol>
+<a href ="{% url 'Analyzer:index' %}">HOME</a>
+</body>
+</html>

@@ -1,0 +1,53 @@
+
+
+#myChart{
+    padding:20px;
+}
+
+a{
+    font-family:'Share Tech',sans-serif;
+}
+
+nav{
+    background-color:#375a7f
+}
+
+#home{
+    background-image:url('img/analysis.jpg');
+    background-size:100%;
+    height: 100%;
+    margin-top:0;
+    padding:270px;
+    background-repeat:no-repeat;
+
+}
+.navbar{
+    margin-bottom:0;
+}
+.navbar-default{
+    margin-bottom:0;
+}
+
+#explanation {
+    color: white;
+    margin-left: 15px;
+    margin-bottom: 0;
+    margin-top: 30px;
+    font-size: large;
+    font-family:'Share Tech',sans-serif;
+
+}
+
+form{
+    background-color:black;
+    border-radius:20px;
+    margin-left:40px;
+    opacity:0.9;
+    width:90%;
+}
+
+.col-md-10{
+    margin-bottom:45px;
+
+}
+

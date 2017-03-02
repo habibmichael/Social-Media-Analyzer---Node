@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Social Media Analyzer</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="font-awesome.css">
+    <link href="https://fonts.googleapis.com/css?family=Share+Tech" rel="stylesheet">
+
+    <!-- Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+    <!-- Chart Styling -->
+    <style>
+        /*.chart {
+            padding-left: 0;
+            padding-right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+            font-size: 30px;
+        }
+
+        #twitter, #facebook {
+            text-allign: center;
+        }
+
+        #nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        #header {
+            width = 100%
+        }
+
+        #top {
+            padding-top: 250px;
+            padding-bottom: 100px;
+            background-color: #f6f6f6;
+        }
+
+        #facebook_box, #geo, #happyUnhappy, #twitter_box {
+            border: 1px solid white;
+            padding-bottom: 50px;
+            padding-top: 100px;
+        }*/
+    </style>
+</head>
+<body>
+   <nav class="navbar navbar-inverse bg-inverse navbar-toggleable-md" id="nav">
+        <a href="#" class="navbar-brand">Social Media Analyzer</a>
+        <div class="collapse navbar-collapse">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="#" >Home</a>
+            </div>
+        </div>
+    </nav>
+<div id="home">
+    <div class="container">
+                <form action='/' method="post">
+                    <div class="row justify-content-md-center">
+                        <p id="explanation">Retrieve sentiment analysis from Twitter & Facebook</p>
+                     </div>
+                    <div class="row justify-content-md-center">
+                        <div class="col-md-10 input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-search fa-2x"></i>
+                            </div>
+                    <input id="keyword" type="text" placeholder="Enter Keyword" name="keyword" placeholder="Keyword" required
+                    class="form-control mr-sm-2"/>
+                        </div>
+                    </div>
+                </form>
+    </div>
+</div>
+
+<div id="happyUnhappy">
+    <div class="row">
+        <div class="col-sm-3">
+            <h4>Twitter Top 10 Keywords in the world</h4>
+            <p>Twitter (/ˈtwɪtər/) is an online news and social networking service where users post and read short
+                140-character messages called "tweets". Registered users can post and read tweets, but those who are
+                unregistered can only read them. Users access Twitter through the website interface, SMS or mobile
+                device app. Twitter Inc. is based in San Francisco and has more than 25 offices around the world.
+                -Wikipedia-
+            </p>
+            <br>
+        </div>
+        <div class="col-sm-9">
+            <canvas class="chart" id="myChart" width="800" height="540px"></canvas>
+        </div>
+    </div>
+</div>
+
+
+<!-- Bootstrap Javascript -->
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+<script> // Return with commas in between
+// var numberWithCommas = function (x) {
+//     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+// };
+
+// // This is unhappy data set
+// var dataPack2 = [10000, 12000, 13000, 14000, 10600, 20300, 20700, 40000, 41000, 40200];
+
+// // Chart.defaults.global.elements.rectangle.backgroundColor = '#FF0000';
+
+// var bar_ctx = document.getElementById('myChart');
+// var bar_chart = new Chart(bar_ctx, {
+//         type: 'bar',
+//         data: {
+//             labels: 'Test',
+//             datasets: [
+//                 {
+//                     label: 'Positive',
+//                     data: [22,444.555],
+//                     backgroundColor: "rgba(55, 160, 225, 0.7)",
+//                     hoverBackgroundColor: "rgba(55, 160, 225, 0.7)",
+//                     hoverBorderWidth: 2,
+//                     hoverBorderColor: 'lightgrey'
+//                 },
+//                 {
+//                     label: 'Negative',
+//                     data: dataPack2,
+//                     backgroundColor: "rgba(225, 58, 55, 0.7)",
+//                     hoverBackgroundColor: "rgba(225, 58, 55, 0.7)",
+//                     hoverBorderWidth: 2,
+//                     hoverBorderColor: 'lightgrey'
+//                 },
+//             ]
+//         },
+//         options: {
+//             animation: {
+//                 duration: 10,
+//             },
+//             tooltips: {
+//                 mode: 'label',
+//                 callbacks: {
+//                     label: function (tooltipItem, data) {
+//                         return data.datasets[tooltipItem.datasetIndex].label + ": " + numberWithCommas(tooltipItem.yLabel);
+//                     }
+//                 }
+//             },
+//             responsive: false,
+//             scales: {
+//                 xAxes: [{
+//                     stacked: true,
+//                     gridLines: {display: false},
+//                 }],
+//                 yAxes: [{
+//                     stacked: true,
+//                     ticks: {
+//                         callback: function (value) {
+//                             return numberWithCommas(value);
+//                         },
+//                     },
+//                 }],
+//             }, // scales
+//             legend: {display: true}
+//         } // options
+//     }
+// );
+</script>
+</body>
+</html>
