@@ -6,9 +6,14 @@ const server = express();
 
 //Serve static files using express
 server.use(express.static('static'));
+server.use(express.static('node_modules/bootstrap/dist'));
+server.use(express.static('node_modules/font-awesome'))
 
 //force middleware to use body-parser
-server.use(bodyParser());
+server.use(bodyParser.json());
+server.use(bodyParser.urlencoded({
+    extended:true
+}));
 
 server.get('/',(req,res)=>{
     res.sendFile(__dirname+'/public/index.html');
