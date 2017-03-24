@@ -60,6 +60,6 @@ server.post('/charts.html',(req,res)=>{
 });
 
 
-server.listen(config.port,config.host,()=>{
+server.listen(3000,config.host,()=>{
     console.log(`Listening on port ${config.port}`);
 });
