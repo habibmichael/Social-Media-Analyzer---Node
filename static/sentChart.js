@@ -16,37 +16,23 @@ function displayChart(twitterScores,facebookScores) {
         datasets: [{
 
             backgroundColor: [
-                'rgba(29,161,242,0.7)',
-                'rgba(29,161,242)'
+                'rgba(0,255,0,0.7)',
+                'rgba(255,0,0,0.7)'
             ],
             borderColor: [
-                'rgba(29,161,242, 0.7)',
-                'rgba(29,161,242,0.7)'
+                'rgba(0,255,0, 0.7)',
+                'rgba(255,0,0,0.7)'
             ],
             borderWidth: 1,
             data: twitterScores
 
         },
-            {
-                backgroundColor: [
-                'rgba(59,89,152,0.7)',
-                'rgba(59,89,152, 0.7)'
-            ],
-            borderColor: [
-                'rgba(59,89,152, 0.7)',
-                'rgba(59,89,152, 0.7)'
-            ],
-            borderWidth: 1,
-            data: [twitterScores[0]-0.2,twitterScores[1]+0.2]
-            }
+          
 
 
         ]
 
     };
-
-
-
 
     var barOptions = {
             legend: {

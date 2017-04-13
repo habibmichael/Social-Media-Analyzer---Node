@@ -1,0 +1,96 @@
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Tweet Charts</title>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" 
+                integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" 
+                crossorigin="anonymous">            <script src="jquery-3.2.0.js"></script>
+
+            <link rel="stylesheet" href="../main.css">
+            <link rel="stylesheet" href="jquery-ui.min.css">
+            <script src="jquery.js"></script>
+            <script src="jquery-ui.min.js"></script>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link href="https://fonts.googleapis.com/css?family=Share+Tech" rel="stylesheet">
+
+            <!-- Chart.js -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+        
+    </head>
+    <body>
+             <nav class="navbar navbar-inverse bg-inverse navbar-toggleable-md" id="nav">
+                <a href="#" class="navbar-brand">Social Media Analyzer</a>
+             <div class="collapse navbar-collapse">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="#" >Home</a>
+            </div>
+        </div>
+    </nav>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <div id="progressbar">
+                        <div class="progress-label">Gathering Sentiment...</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <table class="table">
+                        <tr>
+                            <th>Positive</th>
+                            <th>Negative</th>
+                        </tr>
+                        <tr>
+                            <td class="pos"></td>
+                            <td class="neg"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-8">
+                    <canvas id="myChart" ></canvas>
+                </div>
+            </div>
+        </div>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
+            <script src="../sentChart.js">
+            </script>
+            <script>$( "#progressbar" ).progressbar({
+      value: false
+    });
+                var progressbar = $( "#progressbar" );
+                progressbar.progressbar( "option", "value", false );
+                $("table").hide();  
+                var socket = io('http://localhost:3000');
+                socket.on('hello',function(data){
+                    console.log(data);
+                    this.emit('ready',{ready:true});
+                });
+                socket.on('sentiment',function(data){
+                    progressbar.hide();
+                    $("table").show();
+                    console.log(data);
+                    $i = 0;
+                    var interval = setInterval(function(){
+                        if($i+50<data.scores.length){
+                        var pos = data.scores[$i].positive;
+                        var neg = data.scores[$i].negative;
+                        
+                        var posPercent = "%"+parseFloat(Math.round(pos* 10000) / 100).toFixed(2);
+                        var negPercent = "%"+parseFloat(Math.round(neg* 10000) / 100).toFixed(2);
+
+                        $("td.pos").html(posPercent);
+                        $("td.neg").html(negPercent);
+                        displayChart([pos,neg]);
+                        $i+=50;
+                        }else{
+                            clearInterval(interval);
+                        }
+                    },1000);
+                    
+                   
+                });
+            </script>
+            <script>// displayChart([2,4,3])</script>
+    </body>
+</html>

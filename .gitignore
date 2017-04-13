@@ -1,5 +1,7 @@
 # Dependency Directories
 /node_modules/*
 
+config.js
+
 #Logs
 npm-debug.log*
